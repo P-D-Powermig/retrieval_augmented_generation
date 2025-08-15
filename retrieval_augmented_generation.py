@@ -7,7 +7,7 @@ from langchain_community.embeddings import HuggingFaceBgeEmbeddings
 from langchain_huggingface import HuggingFaceEmbeddings
 from langchain.chains import ConversationalRetrievalChain
 from langchain.memory import ConversationBufferMemory
-from langchain_openai import ChatOpenAI
+from langchain_community.chat_models import ChatOllama
 from langchain_community.document_loaders import PyPDFLoader
 from htmlTemplates import user_template, bot_template, css
 
@@ -54,7 +54,7 @@ def create_vectorstore(text_chunks):
 
 
 def build_conversational_chain(vectorstore):
-    llm = ChatOpenAI(model="gpt-4o-mini")
+    llm = ChatOllama(model="llama3.2:3b", temperature=0)
 
     memory = ConversationBufferMemory(memory_key='chat_history', return_messages=True, output_key="answer")
 

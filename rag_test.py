@@ -9,7 +9,7 @@ from langchain_community.vectorstores import FAISS
 from langchain_huggingface import HuggingFaceEmbeddings
 from langchain.chains import ConversationalRetrievalChain
 from langchain.memory import ConversationBufferMemory
-from langchain_openai import ChatOpenAI
+from langchain_community.chat_models import ChatOllama
 from htmlTemplates import user_template, bot_template, css
 
 TF_ENABLE_ONEDNN_OPTS=0
@@ -125,7 +125,7 @@ def create_vectorstore(text_chunks, model_name):
 
 #### chain
 def build_conversational_chain(vectorstore):
-    llm = ChatOpenAI(model="gpt-4o-mini")
+    llm = ChatOllama(model="llama3.2:3b", temperature=0)
     memory = ConversationBufferMemory(memory_key='chat_history', return_messages=True, output_key="answer")
     chain = ConversationalRetrievalChain.from_llm(
         llm=llm,

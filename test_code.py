@@ -34,3 +34,5 @@ index = VectorstoreIndexCreator(embedding=embeddings).from_loaders([loader])
 response = index.query(query)
 print(response)
 
+ollama pull gpt-oss:20b
+
